@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + HeroUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Nodenet Builder",
+  description: "NodeNet Builder is a puzzle game where players design custom blockchain networks by placing nodes, choosing consensus mechanisms, and testing performance, combining strategic gameplay with blockchain technology for aspiring architects",
   navItems: [
     {
       label: "Home",
@@ -10,15 +10,7 @@ export const siteConfig = {
     },
     {
       label: "Docs",
-      href: "/docs",
-    },
-    {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
+      href: "https://nodenet-builder.gitbook.io/docs/",
     },
     {
       label: "About",
