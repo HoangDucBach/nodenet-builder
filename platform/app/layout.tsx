@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
 
@@ -27,11 +28,14 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersObj = await headers();
+  const cookies = headersObj.get("cookie")!;
+
   return (
     <html suppressHydrationWarning lang="en">
       <head />
@@ -41,7 +45,7 @@ export default function RootLayout({
           fontSourceCodePro.className
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }} cookies={cookies}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
