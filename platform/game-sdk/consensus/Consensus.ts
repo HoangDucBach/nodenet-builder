@@ -11,7 +11,6 @@ export abstract class Consensus {
   abstract validateBlock(block: Block, node: Node): boolean;
 }
 
-/** ✅ Proof of Work (PoW) */
 export class ProofOfWork extends Consensus {
   validateBlock(block: Block, node: Node): boolean {
     if (node.type !== NodeType.MINING_NODE || block.difficulty === undefined) {
@@ -22,7 +21,6 @@ export class ProofOfWork extends Consensus {
   }
 }
 
-/** ✅ Proof of Stake (PoS) */
 export class ProofOfStake extends Consensus {
   validateBlock(block: Block, node: Node): boolean {
     if (
@@ -36,21 +34,23 @@ export class ProofOfStake extends Consensus {
   }
 }
 
-/** ✅ Satoshi Plus (Hybrid PoW + PoS) */
 export class SatoshiPlus extends Consensus {
   validateBlock(block: Block, node: Node): boolean {
-    if (block.difficulty !== undefined && block.stakeThreshold !== undefined) {
-      // Kiểm tra cả PoW & PoS
-      const powValid =
-        node.type === NodeType.MINING_NODE && node.hashPower > block.difficulty;
-      const posValid =
-        node.type === NodeType.VALIDATOR_NODE &&
-        node.stake >= block.stakeThreshold;
+    if (!block.difficulty || !block.stakeThreshold) return false;
 
-      return powValid || posValid;
-    }
+    const powFactor =
+      node.type === NodeType.MINING_NODE
+        ? node.hashPower / (block.difficulty * 2)
+        : 0;
 
-    return false;
+    const posFactor =
+      node.type === NodeType.VALIDATOR_NODE
+        ? node.stake / (block.stakeThreshold * 2)
+        : 0;
+
+    const finalProbability = 0.6 * posFactor + 0.4 * powFactor;
+
+    return Math.random() < finalProbability;
   }
 }
 
