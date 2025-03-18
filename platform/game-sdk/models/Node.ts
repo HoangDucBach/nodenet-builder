@@ -2,18 +2,19 @@ import { BlockchainNetwork } from "../networks";
 import { Block } from "./Block";
 
 export enum NodeType {
-    FULL_NODE,
-    LIGHT_NODE,
-    MINING_NODE,
-    VALIDATOR_NODE
+    FULL_NODE = "FULL_NODE",
+    LIGHT_NODE = "LIGHT_NODE",
+    MINING_NODE = "MINING_NODE",
+    VALIDATOR_NODE = "VALIDATOR_NODE",
 }
 
-export interface NodeConfig {
+export type NodeConfig = {
     id: string;
     type: NodeType;
     stake?: number; // Only for ValidatorNode
     hashPower?: number; // Only for MiningNode
     latency?: number; // Network latency in ms
+    isBusy?: boolean;
 }
 
 class NodeError extends Error {

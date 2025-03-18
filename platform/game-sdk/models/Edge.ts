@@ -1,4 +1,4 @@
-type EdgeConfig = {
+export type EdgeConfig = {
   id: Id;
   from: string;
   to: string;

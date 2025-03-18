@@ -171,7 +171,7 @@ describe("📊 Monitor Test Suite", () => {
   it("📊 Monitor should analyze 5 blockchain networks", async () => {
     for (const network of networks) {
       const monitor = new Monitor(network);
-
+      
       await monitor.printReport();
     }
   }, 30000);

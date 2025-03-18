@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import '@xyflow/react/dist/style.css';
 import { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { Link } from "@heroui/link";
