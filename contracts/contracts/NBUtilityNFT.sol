@@ -6,8 +6,6 @@ import {INBUtilityNFT} from "./interfaces/INBUtilityNFT.sol";
 import {NBAccessControl} from "./NBAccessControl.sol";
 import {IERC165} from "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 
-import "hardhat/console.sol";
-
 contract NBUtilityNFT is INBUtilityNFT, NBAccessControl, ERC1155 {
     mapping(uint256 => NBUtility) public utilities;
 

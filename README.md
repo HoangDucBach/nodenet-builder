@@ -2,40 +2,46 @@
 
 ## ☁️ Overview
 
-NodeNet Builder is a puzzle game where you design a custom blockchain network. Place nodes, select consensus mechanisms, and test the performance to create an optimized network. It combines strategic gameplay with blockchain technology, offering a unique challenge for aspiring blockchain architects.
+NodeNet Builder is an educational puzzle game where players design, optimize, and test custom blockchain networks through strategic placement of nodes, selection of consensus mechanisms, and performance evaluation. The game combines intuitive blockchain simulation with engaging puzzle mechanics, offering progression through increasingly complex network challenges.
 
 ## 🔮 Vision & Purpose
 
 ### 🌐 Vision – The Future of Blockchain Gaming
 
-NodeNet Builder aims to redefine blockchain games by simulating real-world network designs, where players build and test blockchain systems, unlocking new levels of understanding in blockchain architecture.
+Our vision is to redefine blockchain gaming through NodeNet Builder—the simplest, most accessible blockchain simulation game available today. We've eliminated technical barriers to create a user-friendly experience where anyone can build and optimize blockchain networks through intuitive puzzles.
 
 ### 🎯 Purpose – Learn & Innovate through Gameplay
 
-We aim to make blockchain design fun and accessible, allowing players to experiment with node configurations and consensus mechanisms to master real-world blockchain strategies.
+The game's purpose combines straightforward entertainment with educational value and tangible rewards. Players can experiment with blockchain configurations without technical knowledge, instantly visualize transaction flows, and earn real rewards for successful network designs. NodeNet Builder transforms complex blockchain concepts into engaging gameplay where learning happens naturally—and players are compensated for their achievements through our innovative reward system.
 
-## 🚀 Key Innovation
+## 🚀 Innovation Highlights
 
-### 🛠️ Blockchain Network Design
+NodeNet Builder introduces several innovations to the blockchain gaming space:
 
-A simulation that lets players place nodes, connect them, and choose consensus mechanisms to create a functioning blockchain network. Test and optimize for real-world scalability and performance.
+* **Visual Blockchain Simulation:** Real-time visualization of blockchain operations
+* **Parameter-Based Puzzles:** Challenges requiring specific optimization approaches
+* **Dynamic Test Engine:** Comprehensive performance evaluation across multiple metrics
+* **Educational Progression:** Structured learning path through blockchain concepts
 
-### 💼 Stake-to-Play Mechanics
+## 🧩 Puzzle Progression
 
-Players can stake freely to participate and test blockchain network designs. The stake mechanism is flexible, allowing players to experiment without limits, gaining rewards based on their performance at each level. The system is designed to provide fair and enjoyable rewards, with no restrictions on progression.
+No level limits—players stake and choose levels freely. The higher the stake, the more challenging the level, with greater rewards but also increased risks.
 
-## 🔗 Dynamic Test Engine
+1. **Foundation Puzzles:** Learn basic node placement and connections.
+2. **Consensus Challenges:** Optimize networks for different consensus mechanisms.
+3. **Attack Resistance:** Build networks resilient to blockchain attacks.
+4. **Performance Optimization:** Design high-throughput, low-latency networks.
+5. **Scaling Scenarios:** Handle growing transaction volumes and changing conditions.
 
-Run tests like transaction validation, load resistance, and gas price optimization to ensure your blockchain network performs under real conditions.
+> Levels dynamically evolve based on gameplay. Each challenge simulates a test network with a set of blocks—higher levels introduce more diverse blocks, increased error rates, and unpredictable network conditions.
 
 ## 🔑 How Core Chain Works
 
-* 🔒 Secure & Transparent – Blockchain-based validation ensures transparency and real ownership.
-* ⚡ Low Gas Fees & Fast Transactions – Optimized for cost-effective and rapid network interactions.
-* 💰 Core Token – The native token used as a reward, enabling players to earn and stake within the game. Players can use Core Token for various in-game activities like staking and unlocking advanced features.
+* **Secure & Transparent** – Blockchain-based validation ensures transparency and real ownership.
+* **Low Gas Fees & Fast Transactions** – Optimized for cost-effective and rapid network interactions.
+* **Core Token** – The native token used as a reward, enabling players to earn and stake within the game. Players can use Core Token for various in-game activities like staking and unlocking advanced features.
+* **Utility NFT Claims** – Daily utility NFT claims are processed on Core Chain for seamless and efficient distribution.
 
-## 🔮 Future Enhancements
+## Conclusion
 
-• Expanding test scenarios with AI-driven simulations.
-• More node types and consensus algorithms for greater complexity.
-• Advanced network analytics to help players refine strategies.
+NodeNet Builder is a simple blockchain simulation puzzle game built on Core Chain. It turns complex blockchain concepts into interactive challenges that are both fun and educational. Designed for accessibility, the game provides an easy entry point for beginners while still offering depth for experienced players. With a functional prototype ready, the project is set for hackathon evaluation and future expansion.
