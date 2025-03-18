@@ -3,11 +3,14 @@ pragma solidity ^0.8.20;
 
 import {INBStakingReward} from "./interfaces/INBStakingReward.sol";
 import {INBUtilityNFT} from "./interfaces/INBUtilityNFT.sol";
-import {IApi3ReaderProxy} from "@api3/contracts/interfaces/IApi3ReaderProxy.sol";
 import {NBAccessControl} from "./NBAccessControl.sol";
+import {NBRewardVerifier} from "./NBRewardVerifier.sol";
 
-contract NBStakingReward is INBStakingReward, NBAccessControl {
-    IApi3ReaderProxy public api3ReaderProxy;
+contract NBStakingReward is
+    INBStakingReward,
+    NBAccessControl,
+    NBRewardVerifier
+{
     INBUtilityNFT public utilityNFT;
 
     mapping(address => StakeInfo) public stakes;
@@ -17,7 +20,13 @@ contract NBStakingReward is INBStakingReward, NBAccessControl {
     mapping(address => uint256) public insuranceUtilities;
     mapping(address => uint256) public boostUtilities;
 
-    constructor() {}
+    mapping(address => uint256) public lastClaimTimestamp;
+
+    constructor(address _nbPublicKey,
+        address _utilityNFT
+    ) NBRewardVerifier(_nbPublicKey) {
+        utilityNFT = INBUtilityNFT(_utilityNFT);
+    }
 
     receive() external payable {}
 
@@ -26,12 +35,6 @@ contract NBStakingReward is INBStakingReward, NBAccessControl {
     modifier onlyStaker() {
         require(stakes[msg.sender].amount > 0, "NBStakingReward: not staker");
         _;
-    }
-
-    function setApi3ReaderProxy(
-        address _api3ReaderProxy
-    ) external onlyRole(ADMIN_ROLE) {
-        api3ReaderProxy = IApi3ReaderProxy(_api3ReaderProxy);
     }
 
     function setUtilityNFT(address _utilityNFT) external onlyRole(ADMIN_ROLE) {
@@ -93,7 +96,10 @@ contract NBStakingReward is INBStakingReward, NBAccessControl {
     }
 
     function calculateReward(
-        address account
+        address account,
+        int224 delta,
+        uint256 timestamp,
+        bytes calldata signature
     ) external view override returns (uint256) {
         uint256 multiplier = multiplierUtilities[account] != 0
             ? utilityNFT.getUtility(multiplierUtilities[account]).value
@@ -103,7 +109,10 @@ contract NBStakingReward is INBStakingReward, NBAccessControl {
             ? utilityNFT.getUtility(insuranceUtilities[account]).value
             : 0;
 
-        (int224 delta, ) = api3ReaderProxy.read();
+        require(
+            verifyReward(account, delta, timestamp, signature),
+            "NBStakingReward: invalid signature"
+        );
 
         uint256 reward = _calculateReward(
             stakes[account].amount,
@@ -115,7 +124,11 @@ contract NBStakingReward is INBStakingReward, NBAccessControl {
         return reward;
     }
 
-    function claim() external payable override onlyStaker {
+    function claim(
+        int224 delta,
+        uint256 timestamp,
+        bytes calldata signature
+    ) external payable override onlyStaker {
         uint256 multiplier = multiplierUtilities[msg.sender] != 0
             ? utilityNFT.getUtility(multiplierUtilities[msg.sender]).value
             : 1;
@@ -124,7 +137,17 @@ contract NBStakingReward is INBStakingReward, NBAccessControl {
             ? utilityNFT.getUtility(insuranceUtilities[msg.sender]).value
             : 0;
 
-        (int224 delta, ) = api3ReaderProxy.read();
+        require(
+            verifyReward(msg.sender, delta, timestamp, signature),
+            "NBStakingReward: invalid signature"
+        );
+
+        require(
+            lastClaimTimestamp[msg.sender] < timestamp,
+            "NBStakingReward: already claimed"
+        );
+
+        lastClaimTimestamp[msg.sender] = timestamp;
 
         uint256 reward = _calculateReward(
             stakes[msg.sender].amount,

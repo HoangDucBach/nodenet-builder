@@ -15,7 +15,14 @@ interface INBStakingReward {
     function unstake(uint256 amount) external payable;
 
     /// @notice Claim reward
-    function claim() external payable;
+    /// @param delta Delta of reward
+    /// @param timestamp Timestamp of reward
+    /// @param signature Signature of reward
+    function claim(
+        int224 delta,
+        uint256 timestamp,
+        bytes calldata signature
+    ) external payable;
 
     /// @notice Apply utility
     /// @param account Account to apply utility
@@ -31,8 +38,16 @@ interface INBStakingReward {
 
     /// @notice Calculate reward
     /// @param account Account to calculate reward
+    /// @param delta Delta of reward
+    /// @param timestamp Timestamp of reward
+    /// @param signature Signature of reward
     /// @return Reward amount
-    function calculateReward(address account) external view returns (uint256);
+    function calculateReward(
+        address account,
+        int224 delta,
+        uint256 timestamp,
+        bytes calldata signature
+    ) external view returns (uint256);
 
     /// @notice Get reward
     /// @param account Account to get reward
