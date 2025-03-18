@@ -26,6 +26,7 @@
     "@reown/appkit": "^1.6.9",
     "@reown/appkit-adapter-wagmi": "^1.6.9",
     "@reown/appkit-wallet-button": "^1.6.9",
+    "@xyflow/react": "^12.4.4",
     "clsx": "2.1.1",
     "framer-motion": "11.13.1",
     "intl-messageformat": "^10.5.0",
