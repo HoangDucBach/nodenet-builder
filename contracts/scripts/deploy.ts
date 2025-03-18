@@ -1,7 +1,11 @@
-import hre from "hardhat";
+import hre, { ethers } from "hardhat";
 
-var NB_STAKING_REWARD_ADDRESS = "0x0CfAe8A1f3D56439bBa4733BB16D8A96b4eA74E6";
-var NB_UTILITY_NFT_ADDRESS = "0xa34d09E2Cfc3F22CB77a9e4E81593Bb2b85c3002";
+var NB_UTILITY_NFT_ADDRESS = "0xEcb8bF30e96496ab635B4Cc33343965Bc23FAaeE";
+var NB_STAKING_REWARD_ADDRESS = "0x39C29DBA4A02aBfDA65d0b89717D29A6f74c72Ea";
+const nbWallet = ethers.Wallet.createRandom();
+
+var NB_PRIVATE_KEY = nbWallet.privateKey;
+var NB_PUBLIC_KEY = nbWallet.address;
 
 async function deploy() {
     const NBUtilityNFT = await hre.ethers.getContractFactory("NBUtilityNFT");
@@ -11,7 +15,7 @@ async function deploy() {
     console.log("NBUtilityNFT deployed to:", NB_UTILITY_NFT_ADDRESS);
 
     const NBStakingReward = await hre.ethers.getContractFactory("NBStakingReward");
-    const nbStakingReward = await NBStakingReward.deploy(NB_STAKING_REWARD_ADDRESS, NB_UTILITY_NFT_ADDRESS);
+    const nbStakingReward = await NBStakingReward.deploy(NB_PUBLIC_KEY, NB_UTILITY_NFT_ADDRESS);
     await nbStakingReward.waitForDeployment();
     NB_STAKING_REWARD_ADDRESS = await nbStakingReward.getAddress();
     console.log("NBStakingReward deployed to:", NB_STAKING_REWARD_ADDRESS);

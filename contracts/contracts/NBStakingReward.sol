@@ -22,7 +22,8 @@ contract NBStakingReward is
 
     mapping(address => uint256) public lastClaimTimestamp;
 
-    constructor(address _nbPublicKey,
+    constructor(
+        address _nbPublicKey,
         address _utilityNFT
     ) NBRewardVerifier(_nbPublicKey) {
         utilityNFT = INBUtilityNFT(_utilityNFT);
